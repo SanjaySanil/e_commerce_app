@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/controller/splash_screen_controller/splash_screen_controller.dart';
+import 'package:e_commerce_app/controller/api_service_controller/api_service_controller.dart';
 import 'package:e_commerce_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => SplashScreenController(),
+          create: (context) => ApiServiceController(),
         ),
       ],
       child: MaterialApp.router(

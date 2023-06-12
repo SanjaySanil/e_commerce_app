@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/controller/splash_screen_controller/splash_screen_controller.dart';
+import 'package:e_commerce_app/controller/api_service_controller/api_service_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
-        Provider.of<SplashScreenController>(context, listen: false)
-            .loadingFinished();
+        Provider.of<ApiServiceController>(context, listen: false).fetchProduct();
       },
     );
     super.initState();

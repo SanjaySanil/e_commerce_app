@@ -1,17 +1,32 @@
-import 'package:e_commerce_app/routes/app_routes.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:go_router/go_router.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({Key? key}) : super(key: key);
+  ProductCard(
+      {Key? key,
+      required this.id,
+      required this.text,
+      required this.category,
+      required this.description,
+      required this.price,
+      required this.rating,
+      required this.url,
+      required this.onTap})
+      : super(key: key);
+  final int id;
+  final VoidCallback onTap;
+  final String text;
+  final String category;
+  final String description;
+  final double price;
+  final double rating;
+  final String url;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:(){
-        context.push(AppRoutes.detailedView);
-      },
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -25,33 +40,37 @@ class ProductCard extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.2,
-              child: const ClipRRect(
-                borderRadius: BorderRadius.only(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
                 ),
                 child: Image(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(
-                        "https://s.yimg.com/fz/api/res/1.2/pfXZKNsMXFHFpkSGhByk.A--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpbGw7aD0yMjA7cT04MDt3PTE2NQ--/https://s.yimg.com/zb/imgv1/314ff28a-c3e1-3e63-9f17-d265f9686377/t_500x300")),
+                  fit: BoxFit.fill,
+                  image: NetworkImage(url),
+                ),
               ),
             ),
-            const Text(
-              "category",
-              style: TextStyle(fontSize: 15, color: Colors.grey),
+            Text(
+              category,
+              style: const TextStyle(fontSize: 15, color: Colors.grey),
             ),
-            const Text(
-              "Title",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Text(
+              text,
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.ellipsis),
             ),
-            const Text("Rs.50"),
+            Text(price.toString()),
             RatingBar.builder(
-              initialRating: 3,
-              minRating: 1,itemSize:15,
+              initialRating: rating + .0,
+              minRating: 1,
+              itemSize: 15,
               direction: Axis.horizontal,
               allowHalfRating: true,
-              itemCount: 5,
-              itemPadding: const EdgeInsets.only(right:5),
+              itemCount: 6,
+              itemPadding: const EdgeInsets.only(right: 5),
               itemBuilder: (context, _) => const Icon(
                 Icons.star,
                 color: Colors.green,

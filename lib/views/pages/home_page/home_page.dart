@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      initialIndex: 1,
+      initialIndex: 0,
       child: Scaffold(
         appBar: AppBar(
           bottom: const TabBar(tabs: [
@@ -60,10 +60,11 @@ class HomePage extends StatelessWidget {
             )
           ],
         ),
-        body:  TabBarView(
+        body: TabBarView(
           children: [
             Product(),
             Category(),
+            // Category(),
             Cart(),
           ],
         ),

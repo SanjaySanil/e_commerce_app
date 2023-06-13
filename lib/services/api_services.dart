@@ -1,20 +1,14 @@
 import 'dart:convert';
-
-import 'package:e_commerce_app/models/category_model.dart';
+import 'package:e_commerce_app/models/product_model.dart';
 import 'package:http/http.dart' as http;
 
 class ApiServices {
-
-  Future<Iterable> fetchCategories() async {
+  Future<List<String>> fetchCategories() async {
     try {
       final response = await http
           .get(Uri.parse('https://fakestoreapi.com/products/categories'));
       if (response.statusCode == 200) {
-        final  json=jsonDecode(response.body)as List;
-        final category=json.map((e){
-          return CategoryModel(category:e["category"]);
-        });
-        return category;
+        return List<String>.from(jsonDecode(response.body));
       } else {
         throw Exception('Failed to fetch categories');
       }
@@ -23,12 +17,15 @@ class ApiServices {
     }
   }
 
-  Future<List<dynamic>> fetchJewelryProducts() async {
+  Future<List<ProductModel>> fetchProductByCategory(String category) async {
     try {
       final response = await http.get(
-          Uri.parse('https://fakestoreapi.com/products/category/jewelery'));
+          Uri.parse('https://fakestoreapi.com/products/category/$category'));
       if (response.statusCode == 200) {
-        return json.decode(response.body);
+        List<dynamic> jsonData = jsonDecode(response.body);
+        var products =
+            jsonData.map((item) => ProductModel.fromJson(item)).toList();
+        return products;
       } else {
         throw Exception('Failed to fetch jewelry products');
       }
@@ -37,12 +34,13 @@ class ApiServices {
     }
   }
 
-  Future<List<dynamic>> fetchLimitedProducts() async {
+  Future<List<ProductModel>> fetchLimitedProducts() async {
     try {
       final response = await http
           .get(Uri.parse('https://fakestoreapi.com/products?limit=5'));
       if (response.statusCode == 200) {
-        return json.decode(response.body);
+        final List<dynamic> jsonResponse = await json.decode(response.body);
+        return jsonResponse.map((data) => ProductModel.fromJson(data)).toList();
       } else {
         throw Exception('Failed to fetch limited products');
       }
@@ -51,27 +49,28 @@ class ApiServices {
     }
   }
 
-  Future<List<dynamic>> fetchDescendingProducts() async {
+  Future<List<ProductModel>> fetchAllProducts() async {
     try {
       final response = await http
           .get(Uri.parse('https://fakestoreapi.com/products?sort=desc'));
       if (response.statusCode == 200) {
-        return json.decode(response.body);
+        final List<dynamic> jsonResponse = await json.decode(response.body);
+        return jsonResponse.map((data) => ProductModel.fromJson(data)).toList();
       } else {
         throw Exception('Failed to fetch descending products');
       }
     } catch (error) {
-      print(error);
       throw Exception('Failed to connect to the API server');
     }
   }
 
-  Future<Map<String, dynamic>> fetchProductById(int productId) async {
+  Future<ProductModel> fetchProductById(String productId) async {
     try {
       final response = await http
-          .get(Uri.parse('https://fakestoreapi.com/products/$productId'));
+          .get(Uri.parse('https://fakestoreapi.com/products/${productId}'));
       if (response.statusCode == 200) {
-        return json.decode(response.body);
+        final jsonResponse = await json.decode(response.body);
+        return ProductModel.fromJson(jsonResponse);
       } else {
         throw Exception('Failed to fetch product');
       }

@@ -7,24 +7,22 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class AppRoutes {
-  static const String detailedView="/detailedView";
-  static const String categoryView="/categoryView";
+  static const String detailedView = "/detailedView";
+  static const String categoryView = "/categoryView";
   static final router = GoRouter(
     routes: [
+      GoRoute(path: '/', builder: (context, state) => SplashScreen()),
+      GoRoute(path: '/HomePage', builder: (context, state) => HomePage()),
       GoRoute(
-        path: '/',
+        path: "$detailedView/:${"id"}",
+        builder: (context, state) => DetailedPage(
+          id: state.pathParameters["id"]!,
+        ),
+      ),
+      GoRoute(
+        path: "$categoryView/:${"id"}",
         builder: (context, state) =>
-            Provider.of<ApiServiceController>(context).isLoading
-                ? HomePage()
-                : SplashScreen(),
-      ),
-      GoRoute(
-        path:detailedView,
-        builder: (context, state) => DetailedPage(),
-      ),
-      GoRoute(
-        path:"$categoryView/:${"id"}",
-        builder: (context, state) => CategoryView(id:state.pathParameters["id"]!),
+            CategoryView(id: state.pathParameters["id"]!),
       ),
     ],
   );

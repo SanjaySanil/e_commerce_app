@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/controller/api_service_controller/api_service_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,7 +15,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
-        Provider.of<ApiServiceController>(context, listen: false).fetchProduct();
+        Provider.of<ApiServiceController>(context, listen: false)
+            .fetchProduct()
+            .then((value) => context.push('/HomePage'));
       },
     );
     super.initState();

@@ -1,18 +1,55 @@
-
+import 'package:e_commerce_app/models/product_model.dart';
 import 'package:e_commerce_app/services/api_services.dart';
 import 'package:flutter/cupertino.dart';
 
-class ApiServiceController extends ChangeNotifier{
+class ApiServiceController extends ChangeNotifier {
+  final apiService = ApiServices();
+  bool isLoading = false;
+  List<ProductModel> products = [];
+  ProductModel? productsDetails;
+  List<String> category = [];
+
+  List<ProductModel> categoryList = [];
+
+  Future<void> fetchProducts() async {
+    isLoading = true;
+    notifyListeners();
+    products = await apiService.fetchAllProducts() as List<ProductModel>;
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> fetchApi(String id) async {
+    isLoading = true;
+    notifyListeners();
+    productsDetails = await apiService.fetchProductById(id);
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> fetchCategory() async {
+    isLoading = true;
+    notifyListeners();
+    category = await apiService.fetchCategories();
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> fetchByCategory(String id) async {
+    isLoading = true;
+    notifyListeners();
+    categoryList = await apiService.fetchProductByCategory(id);
+    isLoading = false;
+    notifyListeners();
+  }
+
   ApiServices services = ApiServices();
-  bool isLoading=false;
-  List <dynamic>fetchProducts = [];
 
   Future<void> fetchProduct() async {
-    isLoading=false;
+    isLoading = true;
     notifyListeners();
-    final response = await services.fetchDescendingProducts();
-    fetchProducts = response;
-    isLoading=true;
+    fetchProducts();
+    isLoading = false;
     notifyListeners();
   }
 }

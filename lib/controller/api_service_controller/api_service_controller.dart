@@ -19,7 +19,7 @@ class ApiServiceController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchApi(String id) async {
+  Future<void> fetchProductById(String id) async {
     isLoading = true;
     notifyListeners();
     productsDetails = await apiService.fetchProductById(id);

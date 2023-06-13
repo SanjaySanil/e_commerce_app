@@ -1,6 +1,5 @@
 import 'package:e_commerce_app/controller/api_service_controller/api_service_controller.dart';
 import 'package:e_commerce_app/routes/app_routes.dart';
-import 'package:e_commerce_app/services/api_services.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +47,7 @@ class _CategoryState extends State<Category> {
       }
     ];
     return Provider.of<ApiServiceController>(context).isLoading
-        ? Center(
+        ? const Center(
             child: CircularProgressIndicator(),
           )
         : Container(

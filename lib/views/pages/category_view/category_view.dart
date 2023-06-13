@@ -1,7 +1,5 @@
 import 'package:e_commerce_app/controller/api_service_controller/api_service_controller.dart';
-import 'package:e_commerce_app/models/product_model.dart';
 import 'package:e_commerce_app/routes/app_routes.dart';
-import 'package:e_commerce_app/services/api_services.dart';
 import 'package:e_commerce_app/views/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -34,14 +32,14 @@ class _CategoryViewState extends State<CategoryView> {
         iconTheme: const IconThemeData(color: Colors.black),
         title: Text(
           widget.id,
-          style: TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: Provider.of<ApiServiceController>(context).isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : Container(

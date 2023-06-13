@@ -26,7 +26,7 @@ class _ProductState extends State<Product> {
     final products =
         Provider.of<ApiServiceController>(context, listen: true).products;
     return Provider.of<ApiServiceController>(context).isLoading
-        ? Center(
+        ? const Center(
             child: CircularProgressIndicator(),
           )
         : Container(

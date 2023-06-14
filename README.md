@@ -1,16 +1,30 @@
-# e_commerce_app
+# Shopsy
+=>The E-commerce Application is a modern and feature-rich platform designed to facilitate online buying  of products.
+ It offers a seamless and convenient shopping experience for customers.
 
-A new Flutter project.
+# Features
+=> Product Catalog: Provides a visually appealing and organized catalog of products and services,
+allowing users to browse and search for items of interest.
+=>Shopping Cart: Allows users to add products to a virtual shopping cart, review the contents.
+=>Product Listings: Enables customers to view their products,
+including images, descriptions, prices, and availability.
+=>Category Search: Allows users to search for products based on specific categories,
+making it easier to find items within their preferred product groups.
 
-## Getting Started
+# API
+=>FakeStorApi
 
-This project is a starting point for a Flutter application.
+# Dependencies
+=>provider
+=>go_router
+=>hive
 
-A few resources to get you started if this is your first Flutter project:
+# Usage
+# Clone this repository
+$ git clone https://github.com/SanjaySanil/e_commerce_app.git
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+In your IDE run these commands
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+$ flutter clean 
+$ flutter pub get
+$ flutter run
